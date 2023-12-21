@@ -1,0 +1,7 @@
+.header {
+   background: url(./../assets/ciel.jpeg);
+   background-size: cover;
+}
+.footer {
+   background-color: rgba(13, 136, 245, 0.512);
+}
