@@ -1,0 +1,107 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john.doe@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": 2,
+      "firstName": "Jane",
+      "lastName": "Doe",
+      "email": "jane.doe@gmail.com",
+      "password": "123456"
+    }
+  ],
+  "trips": [
+    {
+      "id": 1,
+      "titre": "voyage1",
+      "description": "description1"
+    },
+    {
+      "id": 2,
+      "titre": "voyage2",
+      "description": "description2"
+    },
+    {
+      "id": 3,
+      "titre": "voyage3",
+      "description": "description3"
+    },
+
+    {
+      "titre": "test",
+      "description": "test",
+      "id": 9
+    },
+    {
+      "titre": "test",
+      "description": "test",
+      "id": 10
+    },
+    {
+      "titre": "tre",
+      "description": "etr",
+      "id": 11
+    },
+    {
+      "titre": "tre",
+      "description": "etr",
+      "id": 12
+    }
+  ],
+  "depense": [
+    {
+      "id": 1,
+      "titre": "depense1",
+      "description": "description1",
+      "montant": 100,
+      "date": "2019-01-01",
+      "voyage":1,
+      "idUser":1
+    },
+    {
+      "id": 2,
+      "titre": "depense2",
+      "description": "description2",
+      "montant": 200,
+      "date": "2019-01-02",
+      "voyage":1,
+      "idUser":2
+    },
+    {
+      "id": 3,
+      "titre": "depense3",
+      "description": "description3",
+      "montant": 300,
+      "date": "2019-01-03",
+      "voyage":2,
+      "idUser":2
+    }
+  ],
+  "participe": [
+    {
+      "id": 1,
+      "id_depense": 1,
+      "id_user": 1
+    },
+    {
+      "id": 2,
+      "id_depense": 1,
+      "id_user": 2
+    },
+    {
+      "id": 3,
+      "id_depense": 2,
+      "id_user": 1
+    },
+    {
+      "id": 4,
+      "id_depense": 3,
+      "id_user": 2
+    }
+  ]
+}
