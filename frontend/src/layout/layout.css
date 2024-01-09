@@ -1,7 +1,27 @@
 .header {
-   background: url(./../assets/ciel.jpeg);
+   background-color: rgba(13, 136, 245, 0.512);
    background-size: cover;
+   font-family: 'Lucida Sans';
+   text-align: center;
 }
 .footer {
    background-color: rgba(13, 136, 245, 0.512);
+   background-size: cover;
+   font-family: 'Lucida Sans';
+   /* position: fixed;
+   bottom: 0;
+   width: 100%; */
+   text-align: center;
+   color: black;
+   font-size: 1em;
+   padding: 1em;
+}
+.body-content {
+   display: flex;
+   flex-direction: column;
+   min-height: 100vh;
+}
+
+.fzfzf {
+   flex: 1 1 0%;
 }
