@@ -44,26 +44,26 @@ const getUserById = (req, res) => {
 };
 
 // mettre a jour un utilisateur
-// const updateUser = (req, res) => {
-//    const id = parseInt(req.params.id);
-//    const { name, email } = req.body;
-//    db.query('UPDATE utilisateur SET prenom=$1,nom=$2,email=$3 WHERE id_utilisateur=$4', [nom, prenom, email, id], (error, results) => {
-//       if (error) {
-//          throw error;
-//       }
-//       res.status(200).send(`User modified with ID: ${id}`);
-//    });
-// };
+const updateUser = (req, res) => {
+    const id = parseInt(req.params.id);
+    const { name, email } = req.body;
+    db.query('UPDATE utilisateur SET prenom=$1,nom=$2,email=$3 WHERE id_utilisateur=$4', [nom, prenom, email, id], (error, results) => {
+       if (error) {
+          throw error;
+       }
+       res.status(200).send(`User modified with ID: ${id}`);
+    });
+ };
 // supprimer un utilisateur
-// const deleteUser = (req, res) => {
-//    const id = parseInt(req.params.id);
-//    db.query('DELETE FROM utilisateur WHERE id_utilisateur=$1', [id], (error, results) => {
-//       if (error) {
-//          throw error;
-//       }
-//       res.status(200).send(`User deleted with ID: ${id}`);
-//    });
-// };
+ const deleteUser = (req, res) => {
+    const id = parseInt(req.params.id);
+    db.query('DELETE FROM utilisateur WHERE id_utilisateur=$1', [id], (error, results) => {
+       if (error) {
+          throw error;
+       }
+       res.status(200).send(`User deleted with ID: ${id}`);
+    });
+ };
 //creerVoyage
 const createVoyage = (req, res) => {
    const { titre, description } = req.body;
@@ -76,27 +76,27 @@ const createVoyage = (req, res) => {
 };
 
 //modifierVoyage
-// const updateVoyage = (req, res) => {
-//    const id = parseInt(req.params.id);
-//    const { titre, description } = req.body;
-//    db.query('UPDATE voyage SET titre=$1,description=$2 WHERE id_voyage=$3', [titre, description, id], (error, results) => {
-//       if (error) {
-//          throw error;
-//       }
-//       res.status(200).send(`Voyage modified with ID: ${id}`);
-//    });
-// };
+ const updateVoyage = (req, res) => {
+    const id = parseInt(req.params.id);
+    const { titre, description } = req.body;
+    db.query('UPDATE voyage SET titre=$1,description=$2 WHERE id_voyage=$3', [titre, description, id], (error, results) => {
+       if (error) {
+          throw error;
+       }
+       res.status(200).send(`Voyage modified with ID: ${id}`);
+    });
+ };
 
 //supprimerVoyage
-// const deleteVoyage = (req, res) => {
-//    const id = parseInt(req.params.id);
-//    db.query('DELETE FROM voyage WHERE id_voyage=$1', [id], (error, results) => {
-//       if (error) {
-//          throw error;
-//       }
-//       res.status(200).send(`Voyage deleted with ID: ${id}`);
-//    });
-// };
+ const deleteVoyage = (req, res) => {
+    const id = parseInt(req.params.id);
+    db.query('DELETE FROM voyage WHERE id_voyage=$1', [id], (error, results) => {
+       if (error) {
+          throw error;
+       }
+       res.status(200).send(`Voyage deleted with ID: ${id}`);
+    });
+ };
 
 //recupererVoyage
 const getAllVoyages = (req, res) => {
@@ -150,31 +150,31 @@ const createDepense = (req, res) => {
 };
 
 //modifierDepense
-// const updateDepense = (req, res) => {
-//    const id = parseInt(req.params.id);
-//    const { titre, description, montant, date_crea, id_voyage, id_utilisateur } = req.body;
-//    db.query(
-//       'UPDATE depense SET titre=$1,description=$2,montant=$3,date_crea=$4,id_voyage=$5,id_utilisateur=$6 WHERE id_depense=$7',
-//       [titre, description, montant, date_crea, id_voyage, id_utilisateur, id],
-//       (error, results) => {
-//          if (error) {
-//             throw error;
-//          }
-//          res.status(200).send(`Depense modified with ID: ${id}`);
-//       }
-//    );
-// };
+ const updateDepense = (req, res) => {
+    const id = parseInt(req.params.id);
+    const { titre, description, montant, date_crea, id_voyage, id_utilisateur } = req.body;
+    db.query(
+       'UPDATE depense SET titre=$1,description=$2,montant=$3,date_crea=$4,id_voyage=$5,id_utilisateur=$6 WHERE id_depense=$7',
+       [titre, description, montant, date_crea, id_voyage, id_utilisateur, id],
+       (error, results) => {
+          if (error) {
+             throw error;
+          }
+          res.status(200).send(`Depense modified with ID: ${id}`);
+       }
+    );
+ };
 
 //supprimerDepense
-// const deleteDepense = (req, res) => {
-//    const id = parseInt(req.params.id);
-//    db.query('DELETE FROM depense WHERE id_depense=$1', [id], (error, results) => {
-//       if (error) {
-//          throw error;
-//       }
-//       res.status(200).send(`Depense deleted with ID: ${id}`);
-//    });
-// };
+ const deleteDepense = (req, res) => {
+    const id = parseInt(req.params.id);
+    db.query('DELETE FROM depense WHERE id_depense=$1', [id], (error, results) => {
+       if (error) {
+          throw error;
+       }
+       res.status(200).send(`Depense deleted with ID: ${id}`);
+    });
+ };
 
 //recupererDepense
 // const getAllDepenses = (req, res) => {
@@ -311,17 +311,17 @@ module.exports = {
    createUser,
    getAllUsers,
    getUserById,
-   // updateUser,
-   // deleteUser,
+   updateUser,
+   deleteUser,
    createVoyage,
-   // updateVoyage,
-   // deleteVoyage,
+    updateVoyage,
+    deleteVoyage,
    getAllVoyages,
    getVoyageById,
    // getVoyageByUtilisateur,
    createDepense,
-   // updateDepense,
-   // deleteDepense,
+   updateDepense,
+    deleteDepense,
    // getAllDepenses,
    getDepenseById,
    getDepenseByVoyage,

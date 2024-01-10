@@ -63,6 +63,7 @@ export default function PartageDepense() {
          .then((data: Utilisateur[]) => setListeU(data))
          .catch((error) => console.error('Erreur:', error));
    }, []);
+   console.log('listeUtilisateurs', listeUtilisateurs);
 
    // recuperer le partage des dépenses en fonction du nombre d'utilisateurs ( Total des depenses / nb utilisateur)
    const [partage, setPartage] = useState(0);
@@ -72,6 +73,7 @@ export default function PartageDepense() {
          .then((data) => setPartage(data))
          .catch((error) => console.error('Erreur:', error));
    }, []);
+   console.log('partage', partage);
 
    const [soldesUtilisateurs, setSoldeUtilisateurs] = useState<{ id_utilisateur: number; solde: number }[]>([]);
 
@@ -96,6 +98,7 @@ export default function PartageDepense() {
          if (data) setSoldeUtilisateurs(data);
       });
    }, [listeUtilisateurs, partage]);
+   console.log('soldesUtilisateurs', soldesUtilisateurs);
 
    const [transactions, setTransactions] = useState<{ id_debiteur: number; id_crediteur: number; montant: number }[]>([]);
    useEffect(() => {
@@ -150,6 +153,7 @@ export default function PartageDepense() {
 
       setTransactions(transactions);
    }, [soldesUtilisateurs]);
+   console.log('transactions', transactions);
 
    return (
       <>
@@ -158,14 +162,15 @@ export default function PartageDepense() {
                <h1 className="titre1">{voyage.titre}</h1>
                <h3 className="titre2">{voyage.description}</h3>
 
-               <h3 className="text-decoration-underline">Listes des membres </h3>
                <h5 className="listeUser">{listeUtilisateurs.map((utilisateur: Utilisateur) => `${utilisateur.prenom} ${utilisateur.nom}`).join(', ')}</h5>
                <div style={{ display: 'flex', alignItems: 'flex-end' }}>
                   <h2>{numberFormatter.format(total)}</h2>
                   <h5 style={{ marginLeft: '10px' }}>Total des dépenses</h5>
                </div>
-               <div>
-                  <h3>Transactions:</h3>
+               
+               <hr style={{ borderColor: '#0d6efd', borderWidth: '3px' }} />
+<div>
+                  <h3 className="text-decoration-underline">Transactions:</h3>
                   {transactions.map((transaction) => {
                      const debiteur = listeUtilisateurs.find((utilisateur) => utilisateur.id_utilisateur === transaction.id_debiteur);
                      const crediteur = listeUtilisateurs.find((utilisateur) => utilisateur.id_utilisateur === transaction.id_crediteur);
@@ -177,9 +182,7 @@ export default function PartageDepense() {
                      );
                   })}
                </div>
-               <hr style={{ borderColor: '#0d6efd', borderWidth: '3px' }} />
-
-               <h2>Total: {numberFormatter.format(total)}</h2>
+             
             </Layout>
          )}
       </>

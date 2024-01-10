@@ -8,8 +8,18 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 app.post('/users', userController.createUser);
+app.delete('/usersdel/:id',userController.deleteUser);
+app.put('/usersud/:id',userController.updateUser);
+
+
+
 app.post('/voyages', userController.createVoyage);
+app.delete('/voyagesdel/:id',userController.deleteVoyage);
+app.put('/voyagesud/:id',userController.updateVoyage);
+
 app.post('/depenses', userController.createDepense);
+app.delete('/depensesdel/:id',userController.deleteDepense);
+app.put('/depensesud/:id',userController.updateDepense);
 
 app.get('/users/:id', userController.getUserById);
 

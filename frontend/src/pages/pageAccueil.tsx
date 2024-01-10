@@ -3,7 +3,7 @@ import { API_URL } from '../config/app.ts';
 import Voyage from '../components/cardVoyage.tsx';
 import Layout from '../layout/layout.tsx';
 import CreerVoyage from '../components/creerVoyage.tsx';
-import CreerMembreComponent from '../components/creerMembrecontent.tsx';
+import CreerMembreComponent from '../components/creerMembre.tsx';
 
 export default function Accueil() {
    const [voyages, setVoyage] = useState([]);
@@ -27,12 +27,11 @@ export default function Accueil() {
             {voyages.map((voyage: any) => (
                <Voyage key={voyage.id_voyage} voyage={voyage} />
             ))}
-            
+
             <div className="text-center mt-5">
                <CreerVoyage></CreerVoyage>
 
                <CreerMembreComponent></CreerMembreComponent>
-
             </div>
          </div>
       </Layout>
