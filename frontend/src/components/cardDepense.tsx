@@ -46,7 +46,7 @@ export default function CardDepenses({ depense }: any) {
                </div>
             </div>
             <div className="col-md-2">
-               <ModifierDepense></ModifierDepense>
+               <ModifierDepense depense={depense}></ModifierDepense>
 
                <button type="button" className="btn btn-danger" style={{ margin: '10px' }} onClick={supprimerDepense}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash3-fill" viewBox="0 0 16 16">

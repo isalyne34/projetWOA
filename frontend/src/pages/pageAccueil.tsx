@@ -5,6 +5,13 @@ import Layout from '../layout/layout.tsx';
 import CreerVoyage from '../components/creerVoyage.tsx';
 import CreerMembreComponent from '../components/creerMembre.tsx';
 
+interface Voyage {
+   id_voyage: number;
+   titre: string;
+   description: string;
+   depenses: [];
+}
+
 export default function Accueil() {
    const [voyages, setVoyage] = useState([]);
 
@@ -24,8 +31,8 @@ export default function Accueil() {
             <h1 className="titre text-decoration-underline">Mes ShareAlls :</h1>
 
             {/* parcourir tous les voyages de la classe Voyage et afficher le cardVoyage associé */}
-            {voyages.map((voyage: any) => (
-               <Voyage key={voyage.id_voyage} voyage={voyage} />
+            {voyages.map((voyage: Voyage, i) => (
+               <Voyage key={i} voyage={voyage} />
             ))}
 
             <div className="text-center mt-5">

@@ -48,16 +48,16 @@ export default function CreerMembreComponent() {
                   <div className="modal-body">
                      <Formik
                         initialValues={{
-                           Prenom: '',
-                           Nom: '',
-                           Email: '',
+                           prenom: '',
+                           nom: '',
+                           email: '',
                            id_voyage: 0,
                         }}
                         onSubmit={createUser}
                      >
                         <Form>
                            <div>
-                              <label htmlFor="prenom">Prenom</label>
+                              <label htmlFor="prenom">Prénom</label>
                               <Field name="prenom" type="text" placeholder="prenom" />
                            </div>
                            <div>
@@ -73,7 +73,7 @@ export default function CreerMembreComponent() {
                               <Field as="select" name="id_voyage" placeholder="id_voyage">
                                  <option value="">Sélectionnez un voyage</option>
                                  {voyages.map((voyage) => (
-                                    <option key={voyage.id_voyage} value={voyage.titre}>
+                                    <option key={voyage.id_voyage} value={voyage.id_voyage}>
                                        {voyage.titre}
                                     </option>
                                  ))}

@@ -4,7 +4,6 @@ import CardDepenses from '../components/cardDepense';
 import CreerDepense from '../components/creerDepense';
 import CreerMembreComponent from '../components/creerMembre';
 import { API_URL } from '../config/app';
-import PartageDepense from '../components/partageDepense';
 import { Link, useParams } from 'react-router-dom';
 import ModifierUtilisateur from '../components/modifierUtilisateur';
 
@@ -88,11 +87,21 @@ export default function VoyageDes() {
    return (
       <>
          <Layout>
+            <Link to={`/`}>
+               <button className="btn btn-primary">Retour</button>
+            </Link>
             <h1 className="titre1">{voyage.titre}</h1>
             <h3 className="titre2">{voyage.description}</h3>
 
             {/* <h3 className="text-decoration-underline">Listes des membres </h3> */}
-            <h5 className="listeUser">{listeUtilisateurs.map((utilisateur: Utilisateur) => <div> {utilisateur.prenom} {utilisateur.prenom} <ModifierUtilisateur></ModifierUtilisateur> </div>)} </h5>
+            <h5 className="listeUser">
+               {listeUtilisateurs.map((utilisateur: Utilisateur) => (
+                  <div key={utilisateur.id_utilisateur}>
+                     {' '}
+                     {utilisateur.prenom} {utilisateur.nom} <ModifierUtilisateur utilisateur={utilisateur}></ModifierUtilisateur>{' '}
+                  </div>
+               ))}{' '}
+            </h5>
             <div style={{ display: 'flex', alignItems: 'flex-end' }}>
                <h2>{numberFormatter.format(total)}</h2> <h5 style={{ marginLeft: '10px' }}>Total des dépenses</h5>
             </div>

@@ -6,9 +6,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
 import './index.css';
 import Accueil from './pages/pageAccueil';
-import VoyageDes from './pages/voyage';
+import VoyageDes from './pages/pageVoyage';
 import DescripDepense from './pages/pageDepense';
-import PartageDepense from './components/partageDepense';
+import PartageDepense from './pages/pagePartage';
+import Aide from './pages/pageAide';
 // import PartageDepense2 from './components/test';
 
 const router = createBrowserRouter([
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
    { path: '/voyage/:tripid', element: <VoyageDes /> },
    { path: '/voyage/:tripid/depense/:depenseid', element: <DescripDepense /> },
    { path: '/voyage/:tripid/partage', element: <PartageDepense /> },
+   { path: '/aide', element :<Aide/>},
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

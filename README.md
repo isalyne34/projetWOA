@@ -5,6 +5,10 @@ Lancer le front : npm run dev
 Lancer le back: node server.js
 BDD: http://localhost:3000/
 
+
+
+
+install node 
 ## Frontend
 
 ### Structure
@@ -21,14 +25,6 @@ BDD: http://localhost:3000/
 │   └── 
 ```
 
-### Todo
-
-Faire une liste des voyages
-
--  Rajouter dans back.json les données
--  Faire la page pages/Trips.tsx qui affiche une liste des voyages
--  Faire une page qui permet de créer un voyage
--  Faire une page qui permet de voir un voyage
 
 Si BDD vide : 
 - Créer un voyage et refresh la page 

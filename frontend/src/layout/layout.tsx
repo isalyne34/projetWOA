@@ -1,10 +1,20 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import './layout.css';
+import { API_URL } from '../config/app';
+import CreerVoyage from '../components/creerVoyage';
+import { Dropdown, Nav, NavItem } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
+interface Voyage {
+   id_voyage: number;
+   titre: string;
+   description: string;
+   depenses: [];
+}
 
 export interface LayoutProps {
    children: ReactNode;
 }
-
 export default function Layout({ children }: LayoutProps) {
    return (
       <div className="body-content">
@@ -16,11 +26,66 @@ export default function Layout({ children }: LayoutProps) {
 }
 
 function Header() {
+   const [voyages, setVoyage] = useState([]);
+
+   useEffect(() => {
+      async function fetchVoyage() {
+         const response = await fetch(`${API_URL}/voyages`);
+         const data = await response.json();
+         setVoyage(data);
+      }
+
+      fetchVoyage();
+   }, []);
+console.log(voyages)
    return (
       <div className="header">
-         <div className="text-center">
-            <h1 className="titre fw-bolder  display-1">ShareAll</h1>
+         <div>
+            <img className="logo w-50" src="/assets/logoShareAll.png" />
          </div>
+         
+         <Nav defaultActiveKey="/" className="">
+            <Nav.Item>
+               <Nav.Link>
+                  <Link to={`/`}>
+                     <button type="button" className="btn button btn-primary">
+                        {' '}
+                        Accueil 
+                     </button>
+                  </Link>
+               </Nav.Link>
+            </Nav.Item>
+
+            <Nav.Item>
+               <Dropdown>
+                  <Dropdown.Toggle id="dropdown-basic">Mes ShareAll</Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                     {voyages.map((voyage: Voyage) => (
+                        <Link to={`/voyage/${voyage.id_voyage}`}>
+                           <a className="dropdown-item" >
+                              {voyage.titre}{' '}
+                           </a>
+                        </Link>
+                     ))}
+                  </Dropdown.Menu>
+               </Dropdown>
+            </Nav.Item>
+
+            <Nav.Item>
+               <Nav.Link > <CreerVoyage/></Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+               <Nav.Link  >
+               <Link to={`/aide`}>
+                     <button type="button" className="btn button btn-primary">
+                        {' '}
+                        Aide 
+                     </button>
+                  </Link>
+               </Nav.Link>
+            </Nav.Item>
+         </Nav>
       </div>
    );
 }

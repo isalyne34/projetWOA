@@ -14,7 +14,7 @@ export default function CreerVoyage() {
 
    return (
       <>
-         <button type="button" className="btn button" data-bs-toggle="modal" data-bs-target="#creerShare">
+         <button type="button" className="btn button btn-primary" data-bs-toggle="modal" data-bs-target="#creerShare">
             + Créer un ShareAll{' '}
          </button>
 
@@ -34,10 +34,14 @@ export default function CreerVoyage() {
                         onSubmit={createVoyage}
                      >
                         <Form>
-                           <label htmlFor="titre">titre</label>
+                           <div>
+                           <label htmlFor="titre">Titre</label>
                            <Field name="titre" type="text" placeholder="titre" />
-                           <label htmlFor="description">description</label>
+                           </div>
+                           <div>
+                           <label htmlFor="description">Description</label>
                            <Field name="description" type="text" placeholder="description" />
+                           </div>
 
                            <button type="submit" className="btn btn-success" data-bs-dismiss="modal">
                               Enregistrer

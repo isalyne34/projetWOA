@@ -3,58 +3,77 @@
 import { useEffect, useState } from 'react';
 import { API_URL } from '../config/app';
 import Layout from '../layout/layout';
+import { useParams } from 'react-router-dom';
+
+interface Voyage {
+   id_voyage: number;
+   titre: string;
+   description: string;
+   depenses: [];
+}
+const voyageDefault: Voyage = {
+   id_voyage: 0,
+   titre: '',
+   description: '',
+   depenses: [],
+};
+
+interface Utilisateur {
+   id_utilisateur: number;
+   nom: string;
+   prenom: string;
+   email: string;
+   id_voyage: number;
+}
+const payeurDefault = {
+   id_utilisateur: 0,
+   prenom: '',
+   nom: '',
+   email: '',
+};
+
+interface Depense {
+   id_depense: number;
+   titre: string;
+   description: string;
+   montant: number;
+   date_crea: Date;
+   id_utilisateur: number;
+   id_voyage: number;
+}
+
+const depenseDefault: Depense = {
+   id_depense: 0,
+   titre: '',
+   description: '',
+   montant: 0,
+   date_crea: new Date(),
+   id_utilisateur: 0,
+   id_voyage: 0,
+};
+const numberFormatter = new Intl.NumberFormat('fr-FR', {
+   style: 'currency',
+   currency: 'EUR',
+});
 
 export default function DescripDepense() {
-   const currentURL = window.location.href;
-   console.log(currentURL);
-   const segments = currentURL.split('/');
-   //recuperer le numero de la depense dans l'url
-   const numDepense = segments[6];
-   console.log('depense', numDepense);
-   //recuperer le numero du voyage dans l'url
-   const numTrip = segments[4];
-   console.log('numTrip', numTrip);
-
-   const defaultVoyage = {
-      id_voyage: 0,
-      titre: 'err',
-      description: 'err',
-      depenses: [],
-   };
-   const defaultDepense = {
-      id_depense: 100,
-      titre: 'err',
-      description: 'err',
-      montant: 0,
-      date_crea: '2021-10-10',
-      id_voyage: 100,
-      id_utilisateur: 100,
-   };
-   interface Utilisateur {
-      id_utilisateur: number;
-      nom: string;
-      prenom: string;
-      email: string;
-      id_voyage: number;
-   }
+   let { tripid: numTrip } = useParams<{ tripid: string }>();
+   let { depenseid: idDepense } = useParams<{ depenseid: string }>();
 
    //recuperer le voyage dont l'id est numTrip dans la base de données située dans API_URL
-   const [voyage, setVoyage] = useState(defaultVoyage);
+   const [voyage, setVoyage] = useState<Voyage>(voyageDefault);
    useEffect(() => {
-      console.log('numTrip2', numTrip);
       fetch(`${API_URL}/voyages/${numTrip}`)
          .then((response) => response.json())
          .then((data) => setVoyage(data))
          .catch((error) => console.error('Erreur:', error));
    }, []);
-   console.log('voyagevoyage', voyage);
 
    //recuperer la depense correspondant au numero de depense dans l'url
-   const [depense, setDepense] = useState(defaultDepense);
+   const [depense, setDepense] = useState<Depense>(depenseDefault);
    useEffect(() => {
       if (voyage.id_voyage) {
-         console.log('numDepense', voyage.id_voyage);
-         fetch(`${API_URL}/depenses/${voyage.id_voyage}}`)
+         fetch(`${API_URL}/depenses/${idDepense}}`)
             .then((response) => response.json())
             .then((data) => setDepense(data))
             .catch((error) => console.error('Erreur:', error));
@@ -62,16 +81,7 @@ export default function DescripDepense() {
    }, [voyage]);
    console.log('depense', depense);
 
-   //recuperer le payeur
-   const payeurDefault = {
-      id_utilisateur: 0,
-      prenom: '',
-      nom: '',
-      email: '',
-   };
-
    const [payeur, setPayeur] = useState(payeurDefault);
-   console.log('id payeur', depense.id_utilisateur);
    useEffect(() => {
       if (depense.id_utilisateur) {
          fetch(`${API_URL}/users/${depense.id_utilisateur}`)
@@ -80,7 +90,6 @@ export default function DescripDepense() {
             .catch((error) => console.error('Erreur:', error));
       }
    }, [depense]);
-   console.log('payeur', payeur);
 
    //recuperer les utilisateurs
    const [listeUtilisateurs, setListeU] = useState<Utilisateur[]>([]);
@@ -91,13 +100,16 @@ export default function DescripDepense() {
          .catch((error) => console.error('Erreur:', error));
    }, []);
 
-   const date = new Date(depense.date_crea);
-   const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+   const date = depense.date_crea ? new Date(depense.date_crea) : undefined;
+   const formattedDate = date ? `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}` : '';
 
    //affichage
    return (
       <>
          <Layout>
+            <a href={`/voyage/${numTrip}`} className="btn btn-primary">
+               Retour
+            </a>
             <h1 className="titre1">{voyage.titre}</h1>
             <h3 className="titre2">{voyage.description}</h3>
 

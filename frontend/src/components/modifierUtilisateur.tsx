@@ -19,9 +19,14 @@ const defaultUtilisateur: Utilisateur = {
    email: '',
 };
 
-export default function ModifierUtilisateur() {
+type ModifierUtilisateurProps = {
+   utilisateur: Utilisateur;
+};
+
+export default function ModifierUtilisateur({ utilisateur }: ModifierUtilisateurProps) {
    function modifierUtilisateur(values: any) {
-      fetch(API_URL + '/udutilisateurs/{id}', {
+      console.log(values);
+      fetch(API_URL + `/usersud/${utilisateur.id_utilisateur}`, {
          method: 'PUT',
          headers: {
             'Content-Type': 'application/json',
@@ -29,14 +34,6 @@ export default function ModifierUtilisateur() {
          body: JSON.stringify(values),
       });
    }
-
-   const [utilisateur, setUtilisateur] = useState(defaultUtilisateur);
-   useEffect(() => {
-      fetch(`${API_URL}/users/${utilisateur.id_utilisateur}`)
-         .then((response) => response.json())
-         .then((data) => setUtilisateur(data))
-         .catch((error) => console.error('Erreur:', error));
-   }, []);
 
    function supprimerUtilisateur() {
       fetch(API_URL + `/usersdel/${utilisateur.id_utilisateur}`, {
@@ -48,13 +45,13 @@ export default function ModifierUtilisateur() {
    }
    return (
       <>
-         <button type="button" className="btn " data-bs-toggle="modal" data-bs-target="#modifierUtilisateur">
+         <button type="button" className="btn " data-bs-toggle="modal" data-bs-target={`#modifierUtilisateur${utilisateur.id_utilisateur}`}>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil" viewBox="0 0 16 16">
                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325" />
             </svg>
          </button>
 
-         <div className="modal" tabIndex={-1} id="modifierUtilisateur">
+         <div className="modal" tabIndex={-1} id={`modifierUtilisateur${utilisateur.id_utilisateur}`}>
             <div className="modal-dialog">
                <div className="modal-content">
                   <div className="modal-header">
@@ -70,24 +67,31 @@ export default function ModifierUtilisateur() {
                         }}
                         onSubmit={modifierUtilisateur}
                      >
-                        <Form>
-                           <label htmlFor="nom">nom</label>
-                           <Field name="nom" type="text" placeholder="nom" />
-                           <label htmlFor="prenom">prenom</label>
-                           <Field name="prenom" type="text" placeholder="prenom" />
-                           <label htmlFor="email">email</label>
-                           <Field name="email" type="text" placeholder="email" />
-                           <div>
-                              <button type="submit" className="btn btn-success" data-bs-dismiss="modal">
-                                 Enregistrer
-                              </button>
-                           </div>
-                           <div>
-                              <button type="button" className="btn btn-danger" onClick={supprimerUtilisateur}>
-                                 Supprimer
-                              </button>
-                           </div>
-                        </Form>
+                        {({ handleSubmit }) => (
+                           <Form onSubmit={handleSubmit}>
+                              <div>
+                                 <label htmlFor="nom">Nom</label>
+                                 <Field id="nom" name="nom" type="text" />
+                              </div>
+                              <div>
+                                 <label htmlFor="prenom">Prénom</label>
+                                 <Field id="prenom" name="prenom" type="text" />
+                              </div>
+                              <div>
+                                 <label htmlFor="email">Email</label>
+                                 <Field id="email" name="email" type="email" />
+                              </div>
+                              <div>
+                                 <button type="submit" className="btn btn-success" data-bs-dismiss="modal">
+                                    Enregistrer
+                                 </button>
+
+                                 <button type="button" className="btn btn-danger" onClick={supprimerUtilisateur}>
+                                    Supprimer
+                                 </button>
+                              </div>
+                           </Form>
+                        )}
                      </Formik>
                   </div>
                </div>

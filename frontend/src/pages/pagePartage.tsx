@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { API_URL } from '../config/app';
 import Layout from '../layout/layout';
 import { useParams } from 'react-router-dom';
+import { Card } from 'react-bootstrap';
 
 interface Voyage {
    id_voyage: number;
@@ -26,16 +27,14 @@ const numberFormatter = new Intl.NumberFormat('fr-FR', {
 const Transaction = ({ crediteur, debiteur, montant }: { crediteur: Utilisateur; debiteur: Utilisateur; montant: number }) => {
    return (
       <div>
-         {crediteur.prenom} {crediteur.nom} doit {numberFormatter.format(Math.abs(montant))} à {debiteur.prenom} {debiteur.nom}
+         {debiteur.prenom} {debiteur.nom} doit {numberFormatter.format(Math.abs(montant))} à {crediteur.prenom} {crediteur.nom}
       </div>
    );
 };
 
 export default function PartageDepense() {
-   // get trip id from the react router
    let { tripid: numTrip } = useParams<{ tripid: string }>();
 
-   //recuperer le voyage dont l'id est numTrip dans la base de données située dans API_URL
    const [voyage, setVoyage] = useState<Voyage>();
    useEffect(() => {
       fetch(`${API_URL}/voyages/${numTrip}`)
@@ -85,7 +84,6 @@ export default function PartageDepense() {
                .then((response) => response.json())
                .then((data) => {
                   const solde = partage - data;
-                  // console.log('solde1', solde);
                   return { id_utilisateur: utilisateur.id_utilisateur, solde: solde };
                })
                .then((data) => {
@@ -105,14 +103,14 @@ export default function PartageDepense() {
       const transactions: any[] = [];
 
       //recuperer les debiteurs et les crediteurs
-      //parcourir soldesUtilisateurs si solde>0 alors crediteur sinon debiteur
+      //parcourir soldesUtilisateurs si solde<0 alors crediteur sinon debiteur
       const debiteurs = [];
       const crediteurs = [];
 
       for (let utilisateur of soldesUtilisateurs) {
-         utilisateur = Object.assign({}, utilisateur); // shallow copy
+         utilisateur = Object.assign({}, utilisateur); //copie de l'objet
 
-         if (utilisateur.solde > 0) {
+         if (utilisateur.solde < 0) {
             crediteurs.push({
                id_utilisateur: utilisateur.id_utilisateur,
                solde: utilisateur.solde,
@@ -124,11 +122,12 @@ export default function PartageDepense() {
             });
          }
       }
-
+      console.log('crediteurs', crediteurs);
+      console.log('debiteurs', debiteurs);
       for (const debiteur of debiteurs) {
          for (const crediteur of crediteurs) {
-            if (crediteur.solde > 0) {
-               if (crediteur.solde > debiteur.solde) {
+            if (crediteur.solde < 0) {
+               if (-crediteur.solde > debiteur.solde) {
                   transactions.push({
                      id_debiteur: debiteur.id_utilisateur,
                      id_crediteur: crediteur.id_utilisateur,
@@ -141,10 +140,10 @@ export default function PartageDepense() {
                   transactions.push({
                      id_debiteur: debiteur.id_utilisateur,
                      id_crediteur: crediteur.id_utilisateur,
-                     montant: crediteur.solde,
+                     montant: -crediteur.solde,
                   });
 
-                  debiteur.solde = debiteur.solde - crediteur.solde;
+                  debiteur.solde = debiteur.solde + crediteur.solde;
                   crediteur.solde = 0;
                }
             }
@@ -159,6 +158,9 @@ export default function PartageDepense() {
       <>
          {voyage && (
             <Layout>
+               <a href={`/voyage/${numTrip}`} className="btn btn-primary">
+                  Retour au voyage
+               </a>
                <h1 className="titre1">{voyage.titre}</h1>
                <h3 className="titre2">{voyage.description}</h3>
 
@@ -167,22 +169,42 @@ export default function PartageDepense() {
                   <h2>{numberFormatter.format(total)}</h2>
                   <h5 style={{ marginLeft: '10px' }}>Total des dépenses</h5>
                </div>
-               
+
                <hr style={{ borderColor: '#0d6efd', borderWidth: '3px' }} />
-<div>
+               <div>
                   <h3 className="text-decoration-underline">Transactions:</h3>
-                  {transactions.map((transaction) => {
-                     const debiteur = listeUtilisateurs.find((utilisateur) => utilisateur.id_utilisateur === transaction.id_debiteur);
-                     const crediteur = listeUtilisateurs.find((utilisateur) => utilisateur.id_utilisateur === transaction.id_crediteur);
+                  {soldesUtilisateurs.map((solde) => {
+                     const utilisateur = listeUtilisateurs.find((utilisateur) => utilisateur.id_utilisateur === solde.id_utilisateur);
+                     const style = solde.solde < 0 ? ({ backgroundColor: 'green' } as React.CSSProperties) : ({ backgroundColor: 'red' } as React.CSSProperties);
+                     const transaction = transactions.filter((transaction) => transaction.id_debiteur === utilisateur?.id_utilisateur);
 
-                     if (!debiteur || !crediteur) return null;
+                     if (utilisateur) {
+                        return (
+                           <Card key={utilisateur.id_utilisateur}>
+                              <Card.Header>
+                                 {utilisateur.prenom} {utilisateur.nom}
+                              </Card.Header>
+                              <Card.Body style={style}> <h1 style={{fontWeight: 'bold', textAlign: 'center'}}>{numberFormatter.format(-solde.solde)}</h1>
+                              {transaction.map((transaction) => {
+                                 const debiteur = listeUtilisateurs.find((utilisateur) => utilisateur.id_utilisateur === transaction.id_debiteur);
+                                 const crediteur = listeUtilisateurs.find((utilisateur) => utilisateur.id_utilisateur === transaction.id_crediteur);
 
-                     return (
-                        <Transaction key={`${transaction.id_crediteur}/${transaction.id_debiteur}/${transaction.montant}`} crediteur={crediteur} debiteur={debiteur} montant={transaction.montant} />
-                     );
+                                 if (!debiteur || !crediteur) return null;
+                                 return (
+                                    <Transaction
+                                       key={`${transaction.id_crediteur}/${transaction.id_debiteur}/${transaction.montant}`}
+                                       crediteur={crediteur}
+                                       debiteur={debiteur}
+                                       montant={transaction.montant}
+                                    />
+                                 );
+                              })} </Card.Body>
+                           </Card>
+                        );
+                     }
+                     return <></>;
                   })}
                </div>
-             
             </Layout>
          )}
       </>
