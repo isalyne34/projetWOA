@@ -37,8 +37,7 @@ export default function Accueil() {
 
             <div className="text-center mt-5">
                <CreerVoyage></CreerVoyage>
-
-               <CreerMembreComponent></CreerMembreComponent>
+               {/* <CreerMembreComponent></CreerMembreComponent> */}
             </div>
          </div>
       </Layout>

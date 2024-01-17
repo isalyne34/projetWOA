@@ -182,7 +182,9 @@ export default function PartageDepense() {
                         return (
                            <Card key={utilisateur.id_utilisateur}>
                               <Card.Header>
-                                 {utilisateur.prenom} {utilisateur.nom}
+                                 <h4 style={{ fontWeight: 'bold' }}>
+                                    {utilisateur.prenom} {utilisateur.nom}
+                                 </h4>
                               </Card.Header>
                               <Card.Body style={style}>
                                  {' '}

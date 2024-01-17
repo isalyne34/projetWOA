@@ -37,20 +37,20 @@ function Header() {
 
       fetchVoyage();
    }, []);
-console.log(voyages)
+   console.log(voyages);
    return (
       <div className="header">
          <div>
             <img className="logo w-50" src="/assets/logoShareAll.png" />
          </div>
-         
+
          <Nav defaultActiveKey="/" className="">
             <Nav.Item>
                <Nav.Link>
                   <Link to={`/`}>
                      <button type="button" className="btn button btn-primary">
                         {' '}
-                        Accueil 
+                        Accueil
                      </button>
                   </Link>
                </Nav.Link>
@@ -62,10 +62,8 @@ console.log(voyages)
 
                   <Dropdown.Menu>
                      {voyages.map((voyage: Voyage) => (
-                        <Link to={`/voyage/${voyage.id_voyage}`}>
-                           <a className="dropdown-item" >
-                              {voyage.titre}{' '}
-                           </a>
+                        <Link key={voyage.id_voyage} to={`/voyage/${voyage.id_voyage}`}>
+                           <span className="dropdown-item">{voyage.titre} </span>
                         </Link>
                      ))}
                   </Dropdown.Menu>
@@ -73,14 +71,17 @@ console.log(voyages)
             </Nav.Item>
 
             <Nav.Item>
-               <Nav.Link > <CreerVoyage/></Nav.Link>
+               <Nav.Link>
+                  {' '}
+                  <CreerVoyage />
+               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-               <Nav.Link  >
-               <Link to={`/aide`}>
+               <Nav.Link>
+                  <Link to={`/aide`}>
                      <button type="button" className="btn button btn-primary">
                         {' '}
-                        Aide 
+                        Aide
                      </button>
                   </Link>
                </Nav.Link>

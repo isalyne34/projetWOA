@@ -88,4 +88,11 @@ button:active {
 
 .modal-header {
    background-color: #0d6efd;
+   color:black;
+   text-align:center;
+}
+
+.modal-content{
+   color:black;
+   text-align: left;
 }
