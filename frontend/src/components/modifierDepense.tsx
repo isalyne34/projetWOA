@@ -73,7 +73,7 @@ export default function ModifierDepense({ depense }: ModifierDepenseProps) {
             <div className="modal-dialog">
                <div className="modal-content">
                   <div className="modal-header">
-                     <h5 className="modal-title">Modifier la dépense</h5>
+                     <h5 className="modal-title" >Modifier la dépense</h5>
                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div className="modal-body">
@@ -88,25 +88,25 @@ export default function ModifierDepense({ depense }: ModifierDepenseProps) {
                      >
                         {({ handleSubmit }) => (
                            <Form onSubmit={handleSubmit}>
-                              <div className="mb-3">
+                              <div  className="left-align">
                                  <label htmlFor="titre" className="form-label">
                                     Titre
                                  </label>
                                  <Field type="text" className="form-control" id="titre" name="titre" placeholder={depense.titre} />
                               </div>
-                              <div className="mb-3">
+                              <div  className="left-align">
                                  <label htmlFor="description" className="form-label">
                                     Description
                                  </label>
                                  <Field type="text" className="form-control" id="description" name="description" placeholder={depense.description} />
                               </div>
-                              <div className="mb-3">
+                              <div  className="left-align">
                                  <label htmlFor="montant" className="form-label">
                                     Montant
                                  </label>
                                  <Field type="number" className="form-control" id="montant" name="montant" placeholder={depense.montant} />
                               </div>
-                              <div>
+                              <div  className="left-align"> 
                                  <label htmlFor="idUtilisateur">Utilisateur</label>
                                  <Field as="select" name="id_utilisateur" placeholder="id_utilisateur">
                                     <option value="">Sélectionnez un utilisateur</option>

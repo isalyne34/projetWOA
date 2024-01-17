@@ -33,7 +33,7 @@ export default function CreerMembreComponent() {
    }, []);
 
    return (
-      <>
+      <> 
          <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#creerMembre" style={{ margin: '10px' }}>
             + Ajouter un membre{' '}
          </button>
@@ -42,7 +42,7 @@ export default function CreerMembreComponent() {
             <div className="modal-dialog">
                <div className="modal-content">
                   <div className="modal-header">
-                     <h5 className="modal-title">Ajouter un membre</h5>
+                     <h5 className="modal-title" >Ajouter un membre</h5>
                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div className="modal-body">
@@ -56,21 +56,21 @@ export default function CreerMembreComponent() {
                         onSubmit={createUser}
                      >
                         <Form>
-                           <div>
-                              <label htmlFor="prenom">Prénom</label>
-                              <Field name="prenom" type="text" placeholder="prenom" />
+                           <div  className="left-align">
+                              <label htmlFor="prenom" className="form-label">Prénom</label>
+                              <Field name="prenom" type="text" placeholder="prenom"  className="form-control" />
                            </div>
-                           <div>
-                              <label htmlFor="nom">Nom</label>
-                              <Field name="nom" type="text" placeholder="nom" />
+                           <div  className="left-align">
+                              <label htmlFor="nom" className="form-label">Nom</label>
+                              <Field name="nom" type="text" placeholder="nom" className="form-control" />
                            </div>
-                           <div>
-                              <label htmlFor="email">Email</label>
-                              <Field name="email" type="text" placeholder="email" />
+                           <div  className="left-align">
+                              <label htmlFor="email" className="form-label">Email</label>
+                              <Field name="email" type="text" placeholder="email" className="form-control" />
                            </div>
-                           <div>
-                              <label htmlFor="id_voyage">Choississez un voyage</label>
-                              <Field as="select" name="id_voyage" placeholder="id_voyage">
+                           <div  className="left-align">
+                              <label htmlFor="id_voyage" className="form-label">Choississez un voyage</label>
+                              <Field as="select" name="id_voyage" placeholder="id_voyage"  className="form-control">
                                  <option value="">Sélectionnez un voyage</option>
                                  {voyages.map((voyage) => (
                                     <option key={voyage.id_voyage} value={voyage.id_voyage}>

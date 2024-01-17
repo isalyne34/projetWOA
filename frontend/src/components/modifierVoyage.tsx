@@ -50,7 +50,7 @@ export default function ModifierVoyage({ voyage }: ModifierVoyageProps) {
             <div className="modal-dialog">
                <div className="modal-content">
                   <div className="modal-header">
-                     <h5 className="modal-title">Modifier le ShareAll</h5>
+                     <h5 className="modal-title" >Modifier le ShareAll</h5>
                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div className="modal-body">
@@ -63,14 +63,14 @@ export default function ModifierVoyage({ voyage }: ModifierVoyageProps) {
                      >
                         {({ handleSubmit }) => (
                            <Form onSubmit={handleSubmit}>
-                              <div className="mb-3">
+                              <div  className="left-align">
                                  <label htmlFor="titre" className="form-label">
                                     Titre
                                  </label>
                                  <Field type="text" className="form-control" id="titre" name="titre" placeholder={voyage.titre} />
                               </div>
 
-                              <div className="mb-3">
+                              <div  className="left-align">
                                  <label htmlFor="description" className="form-label">
                                     Description
                                  </label>
@@ -80,7 +80,7 @@ export default function ModifierVoyage({ voyage }: ModifierVoyageProps) {
                                  Enregistrer
                               </button>
                            </Form>
-                        )}
+                        )} 
                      </Formik>
                   </div>
                </div>

@@ -41,7 +41,7 @@ export default function ModifierUtilisateur({ utilisateur }: ModifierUtilisateur
          headers: {
             'Content-Type': 'application/json',
          },
-      });
+      }); 
    }
    return (
       <>
@@ -55,7 +55,7 @@ export default function ModifierUtilisateur({ utilisateur }: ModifierUtilisateur
             <div className="modal-dialog">
                <div className="modal-content">
                   <div className="modal-header">
-                     <h5 className="modal-title">Modifier l'utilisateur</h5>
+                     <h5 className="modal-title" >Modifier l'utilisateur</h5>
                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div className="modal-body">
@@ -69,17 +69,17 @@ export default function ModifierUtilisateur({ utilisateur }: ModifierUtilisateur
                      >
                         {({ handleSubmit }) => (
                            <Form onSubmit={handleSubmit}>
-                              <div>
-                                 <label htmlFor="nom">Nom</label>
-                                 <Field id="nom" name="nom" type="text" />
+                              <div  className="left-align">
+                                 <label htmlFor="nom" className="form-label">Nom</label>
+                                 <Field id="nom" name="nom" type="text"  className="form-control" />
                               </div>
-                              <div>
-                                 <label htmlFor="prenom">Prénom</label>
-                                 <Field id="prenom" name="prenom" type="text" />
+                              <div  className="left-align">
+                                 <label htmlFor="prenom" className="form-label">Prénom</label>
+                                 <Field id="prenom" name="prenom" type="text" className="form-control" />
                               </div>
-                              <div>
-                                 <label htmlFor="email">Email</label>
-                                 <Field id="email" name="email" type="email" />
+                              <div  className="left-align">
+                                 <label htmlFor="email" className="form-label">Email</label>
+                                 <Field id="email" name="email" type="email"  className="form-control"/>
                               </div>
                               <div>
                                  <button type="submit" className="btn btn-success" data-bs-dismiss="modal">

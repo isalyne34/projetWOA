@@ -46,7 +46,7 @@ export default function CreerDepense() {
             <div className="modal-dialog">
                <div className="modal-content">
                   <div className="modal-header">
-                     <h5 className="modal-title">Créer une dépense</h5>
+                     <h5 className="modal-title" >Créer une dépense</h5>
                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div className="modal-body">
@@ -62,26 +62,26 @@ export default function CreerDepense() {
                         onSubmit={createDepense}
                      >
                         <Form>
-                           <div>
-                              <label htmlFor="titre">Titre</label>
-                              <Field name="titre" type="text" placeholder="titre" />
+                           <div  className="left-align"> 
+                              <label htmlFor="titre" className="form-label">Titre</label>
+                              <Field name="titre" type="text" placeholder="titre"  className="form-control" />
                            </div>
-                           <div>
-                              <label htmlFor="description">Description</label>
-                              <Field name="description" type="text" placeholder="description" />
+                           <div  className="left-align">
+                              <label htmlFor="description" className="form-label">Description</label>
+                              <Field name="description" type="text" placeholder="description"  className="form-control" />
                            </div>
-                           <div>
-                              <label htmlFor="montant">Montant</label>
-                              <Field name="montant" type="number" placeholder="montant ( en € )" />
+                           <div  className="left-align">
+                              <label htmlFor="montant" className="form-label">Montant</label>
+                              <Field name="montant" type="number" placeholder="montant ( en € )"  className="form-control"/>
                            </div>
-                           <div>
-                              <label htmlFor="date_crea">Date</label>
-                              <Field name="date_crea" type="date" placeholder="date_crea" />
+                           <div  className="left-align">
+                              <label htmlFor="date_crea" className="form-label">Date</label>
+                              <Field name="date_crea" type="date" placeholder="date_crea"  className="form-control"/>
                            </div>
 
-                           <div>
-                              <label htmlFor="idUtilisateur">Utilisateur</label>
-                              <Field as="select" name="id_utilisateur" placeholder="id_utilisateur">
+                           <div  className="left-align">
+                              <label htmlFor="idUtilisateur" className="form-label">Utilisateur</label>
+                              <Field as="select" name="id_utilisateur" placeholder="id_utilisateur"  className="form-control">
                                  <option value="">Sélectionnez un utilisateur</option>
                                  {membres &&
                                     membres.map((membre) => (
@@ -99,7 +99,7 @@ export default function CreerDepense() {
                      </Formik>
                   </div>
                </div>
-            </div>
+            </div> 
          </div>
       </>
    );

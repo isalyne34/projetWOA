@@ -16,13 +16,13 @@ export default function CreerVoyage() {
       <>
          <button type="button" className="btn button btn-primary" data-bs-toggle="modal" data-bs-target="#creerShare">
             + Créer un ShareAll{' '}
-         </button>
+         </button> 
 
          <div className="modal" tabIndex={-1} id="creerShare">
             <div className="modal-dialog">
                <div className="modal-content">
                   <div className="modal-header">
-                     <h5 className="modal-title">Créer un ShareAll</h5>
+                     <h5 className="modal-title" >Créer un ShareAll</h5>
                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div className="modal-body">
@@ -34,13 +34,13 @@ export default function CreerVoyage() {
                         onSubmit={createVoyage}
                      >
                         <Form>
-                           <div>
-                           <label htmlFor="titre">Titre</label>
-                           <Field name="titre" type="text" placeholder="titre" />
+                           <div  className="left-align">
+                           <label htmlFor="titre" className="form-label">Titre</label>
+                           <Field name="titre" type="text" placeholder="titre"  className="form-control"/>
                            </div>
-                           <div>
-                           <label htmlFor="description">Description</label>
-                           <Field name="description" type="text" placeholder="description" />
+                           <div  className="left-align">
+                           <label htmlFor="description" className="form-label">Description</label>
+                           <Field name="description" type="text" placeholder="description"  className="form-control" />
                            </div>
 
                            <button type="submit" className="btn btn-success" data-bs-dismiss="modal">
