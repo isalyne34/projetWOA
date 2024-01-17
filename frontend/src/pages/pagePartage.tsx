@@ -175,7 +175,7 @@ export default function PartageDepense() {
                   <h3 className="text-decoration-underline">Transactions:</h3>
                   {soldesUtilisateurs.map((solde) => {
                      const utilisateur = listeUtilisateurs.find((utilisateur) => utilisateur.id_utilisateur === solde.id_utilisateur);
-                     const style = solde.solde < 0 ? ({ backgroundColor: 'green' } as React.CSSProperties) : ({ backgroundColor: 'red' } as React.CSSProperties);
+                     const style = solde.solde < 0 ? ({ backgroundColor: 'rgba(0, 128, 0, 0.5)' } as React.CSSProperties) : ({ backgroundColor: 'rgba(255, 0, 0, 0.5)' } as React.CSSProperties);
                      const transaction = transactions.filter((transaction) => transaction.id_debiteur === utilisateur?.id_utilisateur);
 
                      if (utilisateur) {
@@ -184,21 +184,24 @@ export default function PartageDepense() {
                               <Card.Header>
                                  {utilisateur.prenom} {utilisateur.nom}
                               </Card.Header>
-                              <Card.Body style={style}> <h1 style={{fontWeight: 'bold', textAlign: 'center'}}>{numberFormatter.format(-solde.solde)}</h1>
-                              {transaction.map((transaction) => {
-                                 const debiteur = listeUtilisateurs.find((utilisateur) => utilisateur.id_utilisateur === transaction.id_debiteur);
-                                 const crediteur = listeUtilisateurs.find((utilisateur) => utilisateur.id_utilisateur === transaction.id_crediteur);
+                              <Card.Body style={style}>
+                                 {' '}
+                                 <h1 style={{ fontWeight: 'bold', textAlign: 'center' }}>{numberFormatter.format(-solde.solde)}</h1>
+                                 {transaction.map((transaction) => {
+                                    const debiteur = listeUtilisateurs.find((utilisateur) => utilisateur.id_utilisateur === transaction.id_debiteur);
+                                    const crediteur = listeUtilisateurs.find((utilisateur) => utilisateur.id_utilisateur === transaction.id_crediteur);
 
-                                 if (!debiteur || !crediteur) return null;
-                                 return (
-                                    <Transaction
-                                       key={`${transaction.id_crediteur}/${transaction.id_debiteur}/${transaction.montant}`}
-                                       crediteur={crediteur}
-                                       debiteur={debiteur}
-                                       montant={transaction.montant}
-                                    />
-                                 );
-                              })} </Card.Body>
+                                    if (!debiteur || !crediteur) return null;
+                                    return (
+                                       <Transaction
+                                          key={`${transaction.id_crediteur}/${transaction.id_debiteur}/${transaction.montant}`}
+                                          crediteur={crediteur}
+                                          debiteur={debiteur}
+                                          montant={transaction.montant}
+                                       />
+                                    );
+                                 })}{' '}
+                              </Card.Body>
                            </Card>
                         );
                      }

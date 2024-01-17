@@ -86,4 +86,6 @@ button:active {
    width: 50px;
 }
 
-.modal-header {background-color: #0d6efd;}
+.modal-header {
+   background-color: #0d6efd;
+}
