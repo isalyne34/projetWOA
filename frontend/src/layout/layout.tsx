@@ -44,7 +44,7 @@ function Header() {
             <img className="logo w-50" src="/assets/logoShareAll.png" />
          </div>
 
-         <Nav defaultActiveKey="/" className="">
+         <Nav defaultActiveKey="/" className=" justify-content-between align-items-center">
             <Nav.Item>
                <Nav.Link>
                   <Link to={`/`}>

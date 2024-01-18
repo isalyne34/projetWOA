@@ -7,15 +7,15 @@ import { useEffect, useState } from 'react';
 
 interface Utilisateur {
    id_utilisateur: number;
-   nom: string;
    prenom: string;
+   nom: string;
    email: string;
 }
 
 const defaultUtilisateur: Utilisateur = {
    id_utilisateur: 0,
-   nom: '',
    prenom: '',
+   nom: '',
    email: '',
 };
 
@@ -41,7 +41,7 @@ export default function ModifierUtilisateur({ utilisateur }: ModifierUtilisateur
          headers: {
             'Content-Type': 'application/json',
          },
-      }); 
+      });
    }
    return (
       <>
@@ -55,31 +55,38 @@ export default function ModifierUtilisateur({ utilisateur }: ModifierUtilisateur
             <div className="modal-dialog">
                <div className="modal-content">
                   <div className="modal-header">
-                     <h5 className="modal-title" >Modifier l'utilisateur</h5>
+                     <h5 className="modal-title">Modifier l'utilisateur</h5>
                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div className="modal-body">
                      <Formik
                         initialValues={{
-                           nom: utilisateur.nom || '',
                            prenom: utilisateur.prenom || '',
+                           nom: utilisateur.nom || '',
                            email: utilisateur.email || '',
                         }}
                         onSubmit={modifierUtilisateur}
                      >
                         {({ handleSubmit }) => (
                            <Form onSubmit={handleSubmit}>
-                              <div  className="left-align">
-                                 <label htmlFor="nom" className="form-label">Nom</label>
-                                 <Field id="nom" name="nom" type="text"  className="form-control" />
-                              </div>
-                              <div  className="left-align">
-                                 <label htmlFor="prenom" className="form-label">Prénom</label>
+                              <div className="left-align">
+                                 <label htmlFor="prenom" className="form-label">
+                                    Prénom
+                                 </label>
                                  <Field id="prenom" name="prenom" type="text" className="form-control" />
                               </div>
-                              <div  className="left-align">
-                                 <label htmlFor="email" className="form-label">Email</label>
-                                 <Field id="email" name="email" type="email"  className="form-control"/>
+                              <div className="left-align">
+                                 <label htmlFor="nom" className="form-label">
+                                    Nom
+                                 </label>
+                                 <Field id="nom" name="nom" type="text" className="form-control" />
+                              </div>
+
+                              <div className="left-align">
+                                 <label htmlFor="email" className="form-label">
+                                    Email
+                                 </label>
+                                 <Field id="email" name="email" type="email" className="form-control" />
                               </div>
                               <div>
                                  <button type="submit" className="btn btn-success" data-bs-dismiss="modal">
