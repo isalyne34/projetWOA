@@ -15,7 +15,7 @@ Vous aurez ainsi accès à différentes fonctionnalités :
 -  Equilibrer et connaitre combien vous devez à chaque participants
 
 ![Alt text](image-1.png)
-
+![Alt text](assemblage.png)
 
 
 ## Pré-requis
@@ -87,7 +87,7 @@ module.exports = pool;
    node server.js
    ```
 
--  Ouvrir un navigateur à l'adresse [http://localhost:5173]
+-  Ouvrir un navigateur à l'adresse [](http://localhost:5173)
 
 ## Guide d'utilisation
 
