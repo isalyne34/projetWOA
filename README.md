@@ -41,7 +41,7 @@ npm install
 ```
 
 -  Dans postgresql, récupérer le [script](
-creation_bd.txt) et l'importer afin de créer les tables. Créer une nouvelle BDD et un utilisateur qui possède des droits dessus.
+creation_bd.sql) et l'importer afin de créer les tables. Créer une nouvelle BDD et un utilisateur qui possède des droits dessus.
 
 ``` bash
 psql
