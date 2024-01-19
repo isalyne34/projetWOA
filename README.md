@@ -8,11 +8,11 @@ Mon application web nommée ShareAll permet donc de gérer et d'équilibrer les 
 
 Vous aurez ainsi accès à différentes fonctionnalités :
 
--  Créer des ShareAll ( groupe)
+-  Créer des ShareAll (groupe)
 -  Ajouter des participants
 -  Ajouter des dépenses
 -  Suivre l'état des comptes
--  Equilibrer et connaitre combien vous devez à chaque participants
+-  Équilibrer et connaitre combien vous devez à chaque participants
 
 ![Alt text](image-1.png)
 ![Alt text](assemblage.png)
@@ -20,20 +20,18 @@ Vous aurez ainsi accès à différentes fonctionnalités :
 
 ## Pré-requis
 
-Afin de pouvoir exécuter l'application sur votre poste, vous devez dabord installer les dépendances suivantes :
+Afin de pouvoir exécuter l'application sur votre poste, vous devez d'abord installer les dépendances suivantes :
 
 -  Node.js : Vous pouvez le télécharger et l'installer à partir de https://nodejs.org/. Version : v18.13.0
 
 -  npm (Node Package Manager) : Il est automatiquement installé avec Node.js. npm est utilisé pour installer les dépendances nécessaires pour l'application.
 
--  Postgres : Vous pouvez l'installer à partir de https://www.postgresql.org/download/
+-  Postgresql : Vous pouvez l'installer à partir de https://www.postgresql.org/download/
 
 ## Procédure d'installation
 
-- Pour installer l’application sur son PC, on commence par télécharger son code source avec git dans un dossier.
+- Pour installer l’application sur son PC, on commence par télécharger son code source avec git .
 ```bash
-mkdir projetwoa
-cd projetwoa
 git clone git@github.com:isalyne34/projetWOA.git
 ```
 -  Commencer par installer toutes les dépendances grâce à la commande :
@@ -42,16 +40,24 @@ git clone git@github.com:isalyne34/projetWOA.git
 npm install
 ```
 
--  Dans postgres , récupérer le script et l'importer afin de créer les tables. Puis se connecter à la database grâce à la commande
+-  Dans postgresql, récupérer le script et l'importer afin de créer les tables. Créer une nouvelle BDD et un utilisateur qui possède des droits dessus.
 
 ``` bash
-psql -d postgres -U nomUtilisateur
-```
+psql
 
-Puis créer la base de données
+postgres=# create user nomUtilisateur;
+CREATE ROLE
 
-```postgres 
-CREATE DATABASE nomProjet
+postgres=# create database "nomProjet";
+CREATE DATABASE
+
+postgres=# grant all privileges on database nomProjet to nomUtilisateur;
+GRANT
+
+postgres=# alter role nomUtilisateur with password 'password';
+ALTER ROLE
+
+psql -U nomUtilisateur -h localhost -d nomProjet
 ```
 
 Puis modifier le fichier [postgres-config.js](https://github.com/isalyne34/projetWOA/blob/main/backend/postgres-config.js) présent dans le dossier backend pour qu'il corresponde à vos données .
@@ -60,7 +66,7 @@ Puis modifier le fichier [postgres-config.js](https://github.com/isalyne34/proje
 const Pool = require('pg').Pool;
 const pool = new Pool({
    user: 'nomUtilisateur',
-   host: 'postgresql.local',
+   host: 'URLbasedonnées',
    database: 'nomProjet',
    password: 'password',
    port: 5432,
@@ -73,18 +79,18 @@ module.exports = pool;
 
 -  Ouvrir un terminal à la racine du projet .
 
--  Lancer le frontend :
-
-   ```bash
-   cd frontend
-   npm run dev
-   ```
-
 -  Lancer le backend :
 
    ```bash
    cd backend
    node server.js
+   ```
+
+-  Lancer le frontend :
+
+   ```bash
+   cd frontend
+   npm run dev
    ```
 
 -  Ouvrir un navigateur à l'adresse [http://localhost:5173](http://localhost:5173)
@@ -116,25 +122,24 @@ module.exports = pool;
 
 **Back** : node, express
 
-**Base de données** postgres 
+**Base de données** postgresql
+
 ![Alt text](image.png)
 
 
 ## Structure du projet
 
 ```
-├── public
-|   ├── assets <-- images
-├── src
-│   ├── config <-- configurations
-│   ├── components <-- composants de l'application (tout ceux qui ne sont pas des pages)
-│   ├── layout <-- Définition du header et footer
-│   ├── pages <-- Tout composants qui sont utilisés par le routeur
-│   ├── index.css <-- Style du site
-│   └── main.tsx <-- Différentes routes du site
-```
-
-```
+├── frontend
+│  ├── public
+│  |   ├── assets <-- images
+│  ├── src
+│  │   ├── config <-- configurations
+│  │   ├── components <-- composants de l'application (tout ceux qui ne sont pas des pages)
+│  │   ├── layout <-- Définition du header et footer
+│  │   ├── pages <-- Tout composants qui sont utilisés par le routeur
+│  │   ├── index.css <-- Style du site
+│  └── └── main.tsx <-- Différentes routes du site
 ├── backend
 |   ├── postgres-config.js
 │   ├── queries.js <-- Définition des différentes requêtes
@@ -145,10 +150,10 @@ module.exports = pool;
 
 ## Modifications futures
 
-[ ]  Ajout de photos pour partager les tickets de caisse
+- [ ]  Ajout de photos pour partager les tickets de caisse
 
-[ ]  Notifications
+- [ ]  Notifications
 
-[ ]  Fonctionnement hors-ligne
+- [ ]  Fonctionnement hors-ligne
 
-[ ]  Répartition inégale
+- [ ]  Répartition inégale
