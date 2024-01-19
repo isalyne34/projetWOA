@@ -40,7 +40,7 @@ git clone git@github.com:isalyne34/projetWOA.git
 npm install
 ```
 
--  Dans postgresql, récupérer le script et l'importer afin de créer les tables. Créer une nouvelle BDD et un utilisateur qui possède des droits dessus.
+-  Dans postgresql, récupérer le [script](/home/isalyne-llinares-rames/Documents/S5/dev/shareall/creation_bd.txt) et l'importer afin de créer les tables. Créer une nouvelle BDD et un utilisateur qui possède des droits dessus.
 
 ``` bash
 psql
