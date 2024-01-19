@@ -87,7 +87,7 @@ module.exports = pool;
    node server.js
    ```
 
--  Ouvrir un navigateur à l'adresse [](http://localhost:5173)
+-  Ouvrir un navigateur à l'adresse [http://localhost:5173](http://localhost:5173)
 
 ## Guide d'utilisation
 
