@@ -99,8 +99,8 @@ module.exports = pool;
     -  Créer un utilisateur et l'ajouter au voyage
     -  Cliquer sur le voyage, et créer des dépenses en associant la dépense à la personne qui l'a créée 
 
-    > [!WARNING]
-    > Il faut créer l'utilisateur avant de pouvoir l'associer
+> [!WARNING]
+> Il faut créer l'utilisateur avant de pouvoir l'associer
 
 - Si la base de données existe déjà, vous pouvez :
     - Modifier un voyage grâce au bouton crayon situé à droite
@@ -145,10 +145,10 @@ module.exports = pool;
 
 ## Modifications futures
 
-[ ] Ajout de photos pour partager les tickets de caisse
+[ ]  Ajout de photos pour partager les tickets de caisse
 
-[ ] Notifications
+[ ]  Notifications
 
-[ ] Fonctionnement hors-ligne
+[ ]  Fonctionnement hors-ligne
 
-[ ] Répartition inégale
+[ ]  Répartition inégale
