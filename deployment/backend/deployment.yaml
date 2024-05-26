@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: backend-deployment
+   labels:
+      app: backend
+spec:
+   replicas: 3
+   selector:
+      matchLabels:
+         app: backend
+   template:
+      metadata:
+         labels:
+            app: backend
+      spec:
+         containers:
+            - name: backend
+              image: ttl.sh/illinares-backend:1h
+              ports:
+                 - containerPort: 3000
+              readinessProbe:
+                 httpGet:
+                    path: /voyages
+                    port: 3000
+                 initialDelaySeconds: 5
+                 periodSeconds: 10
+              livenessProbe:
+                 httpGet:
+                    path: /voyages
+                    port: 3000
+                 initialDelaySeconds: 15
+                 periodSeconds: 20

@@ -1,1 +1,1 @@
-export const API_URL = 'https://api.auditizr.com';
+export const API_URL = 'http://api.example.com:50000';
