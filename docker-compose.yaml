@@ -1,0 +1,38 @@
+version: '3'
+services:
+  backend:
+    restart: always
+    image: back
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres
+    command: ["sh", "-c", "sleep 10 && node server.js"]
+
+  frontend:
+    restart: always
+    image: front
+    ports:
+      - 8080:80
+
+  postgres:
+    restart: always
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - ./creation_bd.sql:/docker-entrypoint-initdb.d/creation_bd.sql
+
+  proxy:
+    restart: always
+    image: 'jc21/nginx-proxy-manager:latest'
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+      
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
